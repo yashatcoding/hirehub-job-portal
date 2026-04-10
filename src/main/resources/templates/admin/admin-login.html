@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Admin Login</title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body class="bg-light">
+
+<div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+
+<div class="card p-4 shadow" style="width:400px;">
+
+<h3 class="text-center mb-3">Admin Login</h3>
+
+<!-- ERROR MESSAGE -->
+<div th:if="${error}" class="alert alert-danger text-center">
+<span th:text="${error}"></span>
+</div>
+
+<!-- LOGIN FORM -->
+<form th:action="@{/admin/login}" method="post" novalidate>
+
+<div class="mb-3">
+<label>Email</label>
+<input type="email"
+       name="email"
+       class="form-control"
+       placeholder="Enter admin email">
+</div>
+
+<div class="mb-3">
+<label>Password</label>
+<input type="password"
+       name="password"
+       class="form-control"
+       placeholder="Enter password">
+</div>
+
+<button class="btn btn-dark w-100">
+Login
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

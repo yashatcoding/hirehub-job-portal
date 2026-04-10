@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register | HireHub</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="bg-light">
+
+<!-- NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height:100vh; padding-top:80px;">
+
+    <div class="card shadow-sm p-4" style="width:100%; max-width:500px;">
+
+        <h3 class="fw-bold text-center mb-3">Create an Account</h3>
+
+        <!-- Email Already Exists Error -->
+        <div th:if="${error}" class="alert alert-danger text-center">
+            <span th:text="${error}"></span>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <form th:action="@{/register}"
+              th:object="${user}"
+              method="post"
+              novalidate>
+
+            <!-- NAME -->
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+
+                <input type="text"
+                       th:field="*{name}"
+                       class="form-control"
+                       placeholder="Enter your name">
+
+                <div class="text-danger"
+                     th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}">
+                </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+
+                <input type="email"
+                       th:field="*{email}"
+                       class="form-control"
+                       placeholder="Enter your email">
+
+                <div class="text-danger"
+                     th:if="${#fields.hasErrors('email')}"
+                     th:errors="*{email}">
+                </div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+
+                <input type="password"
+                       th:field="*{password}"
+                       class="form-control"
+                       placeholder="Create password">
+
+                <div class="text-danger"
+                     th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}">
+                </div>
+            </div>
+
+            <!-- ROLE -->
+            <div class="mb-3">
+                <label class="form-label">Register As</label>
+
+                <select th:field="*{role}" class="form-select">
+                    <option value="JOB_SEEKER">Job Seeker</option>
+                    <option value="EMPLOYER">Employer</option>
+                </select>
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit" class="btn btn-primary w-100">
+                Register
+            </button>
+
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            Already have an account?
+            <a th:href="@{/login}">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

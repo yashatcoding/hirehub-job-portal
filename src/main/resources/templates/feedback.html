@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card p-4 shadow" style="max-width:500px; margin:auto;">
+        <h4 class="text-center mb-3">Feedback</h4>
+
+        <div th:if="${success}" class="alert alert-success"
+             th:text="${success}"></div>
+
+        <form th:action="@{/feedback}" method="post">
+
+            <input type="text" name="name" class="form-control mb-2"
+                   placeholder="Your Name" required>
+
+            <input type="email" name="email" class="form-control mb-2"
+                   placeholder="Your Email" required>
+
+            <textarea name="message" class="form-control mb-3"
+                      placeholder="Your Feedback" required></textarea>
+
+            <button class="btn btn-primary w-100">Submit</button>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

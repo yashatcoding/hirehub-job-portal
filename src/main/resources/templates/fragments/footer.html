@@ -1,0 +1,247 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+        <p class="mb-1">© 2026 HireHub. All Rights Reserved.</p>
+        <small>Built with ❤️ using Spring Boot & Thymeleaf</small>
+    </div>
+</footer>
+
+<!-- WhatsApp-style Chatbot -->
+<div id="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+
+<div id="chatbot-box">
+    <div id="chatbot-header">
+        <div>
+            <div id="chatbot-title">HireHub Assistant</div>
+            <div id="chatbot-status">online</div>
+        </div>
+        <button id="chatbot-close" type="button" onclick="toggleChatbot()">✕</button>
+    </div>
+
+    <div id="chatbot-messages">
+        <div class="bot-row">
+            <div class="bot-bubble">
+                Hi 👋 I am HireHub Assistant.<br>
+                Ask me about jobs, login, register, feedback, admin.
+            </div>
+        </div>
+    </div>
+
+    <div id="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Type a message" onkeypress="handleChatbotKey(event)">
+        <button type="button" id="chatbot-send" onclick="sendChatbotMessage()">➤</button>
+    </div>
+</div>
+
+<style>
+#chatbot-toggle{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#25d366;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,0.25);
+    z-index:9999;
+}
+
+#chatbot-box{
+    display:none;
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:340px;
+    max-width:90vw;
+    height:470px;
+    background:#efeae2;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    z-index:9999;
+    border:1px solid #dcdcdc;
+}
+
+#chatbot-header{
+    background:#075e54;
+    color:#fff;
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+#chatbot-title{
+    font-weight:700;
+    font-size:15px;
+    line-height:1.1;
+}
+
+#chatbot-status{
+    font-size:12px;
+    opacity:0.9;
+    margin-top:2px;
+}
+
+#chatbot-close{
+    background:transparent;
+    border:none;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#chatbot-messages{
+    height:360px;
+    overflow-y:auto;
+    padding:14px 12px;
+    background:#efeae2;
+}
+
+.user-row,
+.bot-row{
+    display:flex;
+    margin-bottom:10px;
+}
+
+.user-row{
+    justify-content:flex-end;
+}
+
+.bot-row{
+    justify-content:flex-start;
+}
+
+.user-bubble,
+.bot-bubble{
+    max-width:78%;
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.4;
+    word-wrap:break-word;
+    box-shadow:0 1px 2px rgba(0,0,0,0.08);
+}
+
+.user-bubble{
+    background:#dcf8c6;
+    color:#111;
+    border-bottom-right-radius:4px;
+}
+
+.bot-bubble{
+    background:#fff;
+    color:#111;
+    border-bottom-left-radius:4px;
+}
+
+#chatbot-input-area{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px;
+    background:#f0f2f5;
+    border-top:1px solid #ddd;
+}
+
+#chatbot-input{
+    flex:1;
+    border:1px solid #ccc;
+    border-radius:24px;
+    padding:10px 14px;
+    outline:none;
+    font-size:14px;
+}
+
+#chatbot-send{
+    border:none;
+    background:#25d366;
+    color:#fff;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+</style>
+
+<script>
+function toggleChatbot() {
+    const box = document.getElementById("chatbot-box");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function handleChatbotKey(event) {
+    if (event.key === "Enter") {
+        sendChatbotMessage();
+    }
+}
+
+function sendChatbotMessage() {
+    const input = document.getElementById("chatbot-input");
+    const message = input.value.trim();
+    if (message === "") return;
+
+    const chat = document.getElementById("chatbot-messages");
+
+    chat.innerHTML += `
+        <div class="user-row">
+            <div class="user-bubble">${escapeHtml(message)}</div>
+        </div>
+    `;
+
+    const reply = getChatbotReply(message.toLowerCase());
+
+    setTimeout(() => {
+        chat.innerHTML += `
+            <div class="bot-row">
+                <div class="bot-bubble">${reply}</div>
+            </div>
+        `;
+        chat.scrollTop = chat.scrollHeight;
+    }, 400);
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function getChatbotReply(msg) {
+    if (msg.includes("job")) {
+        return "You can explore all jobs on the Jobs page.";
+    }
+    if (msg.includes("apply")) {
+        return "Open a job and click <b>Apply Now</b> to submit your application.";
+    }
+    if (msg.includes("login")) {
+        return "Go to the Login page and enter your email and password.";
+    }
+    if (msg.includes("register")) {
+        return "Go to Register page and create your account first.";
+    }
+    if (msg.includes("admin")) {
+        return "Admin panel is available at <b>/admin/login</b>.";
+    }
+    if (msg.includes("feedback")) {
+        return "You can share your feedback from the Feedback page.";
+    }
+    if (msg.includes("password")) {
+        return "Use Change Password after login or Forgot Password from the login page.";
+    }
+    return "Sorry, I didn’t understand that. Try asking about jobs, login, register, feedback, or admin.";
+}
+
+function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.innerText = text;
+    return div.innerHTML;
+}
+</script>
+
+</th:block>

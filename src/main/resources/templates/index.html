@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HireHub | Find Your Dream Job</title>
+
+    <!-- Local Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR FRAGMENT ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero-section pt-5 mt-5">
+    <div class="container text-center">
+        <h1 class="fw-bold">Find Your Dream Job Today</h1>
+        <p class="text-muted mt-3">Search jobs from top companies across India</p>
+
+        <form class="row justify-content-center mt-4">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Job title">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Location">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ================= FEATURED JOBS ================= -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Featured Jobs</h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Java Developer</h5>
+                        <p class="text-muted">TCS • Bangalore</p>
+                        <span class="badge bg-success">Full Time</span>
+                        <a th:href="@{/jobs}" class="btn btn-outline-primary w-100 mt-3">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Frontend Developer</h5>
+                        <p class="text-muted">Infosys • Pune</p>
+                        <span class="badge bg-warning">Internship</span>
+                        <a th:href="@{/jobs}" class="btn btn-outline-primary w-100 mt-3">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Backend Developer</h5>
+                        <p class="text-muted">Wipro • Remote</p>
+                        <span class="badge bg-info">Remote</span>
+                        <a th:href="@{/jobs}" class="btn btn-outline-primary w-100 mt-3">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER FRAGMENT ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Local Bootstrap JS -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

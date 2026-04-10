@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-5 pt-5">
+
+<h2 class="mb-4">User Dashboard</h2>
+
+<div class="card shadow-sm p-4">
+
+<h4>Welcome</h4>
+
+<p>
+Name: <span th:text="${user.name}"></span>
+</p>
+
+<p>
+Email: <span th:text="${user.email}"></span>
+</p>
+
+<a th:href="@{/user/edit/{id}(id=${user.id})}"
+   class="btn btn-primary">
+Edit Profile
+</a>
+<a th:href="@{'/user/change-password/' + ${user.id}}"
+   class="btn btn-warning">
+   Change Password
+</a>
+
+</div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

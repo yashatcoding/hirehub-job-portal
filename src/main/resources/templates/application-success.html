@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Application Submitted</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+<div class="container mt-5 text-center">
+
+<h2 class="text-success">Application Submitted Successfully</h2>
+
+<p th:text="${message}"></p>
+
+<a th:href="@{/jobs}" class="btn btn-primary">
+Back to Jobs
+</a>
+
+</div>
+
+</body>
+</html>
